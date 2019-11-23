@@ -1,0 +1,200 @@
+server:
+  ip: 127.0.0.1
+  port: 8080
+  max-http-header-size: 10000000
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /demo
+spring:
+  application:
+    name: demo
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+  datasource:
+    #    schema: database/data.sql  jpa默认为create的时候会去找脚本位置并执行
+    #的属性设置为 create or create-drop的时候，Spring Boot 启动时默认会扫描 classpath 下面（项目中一般是 resources 目录）是否有import.sql，如果有机会执行import.sql脚本。
+    #data: classpath:data.sql # data.sql中一般是DML脚本，即通常为数据插入脚本
+    #schema: classpath:schema_1.sql, classpath:schema_2.sql 多个
+    #创建不同环境的文件夹  schema: classpath:${spring.profiles.active:dev}/schema.sql
+    #schema: classpath:${spring.profiles.active:dev}/schema-${spring.datasource.platform}.sql 不同数据库 schema-mysql.sql
+    #    sql-script-encoding: utf-8
+    url: jdbc:mysql://localhost:3306/demo?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #  mail:
+  #    #邮箱服务器地址
+  #    host: smtp.qiye.163.com
+  #    username: 454749293@qq.com
+  #    password: caiwei@920314..,
+  #    default-encoding: UTF-8
+#  redis:
+#    database: 0
+#    host: localhost
+#    password:
+#    port: 6379
+#    timeout: 30000
+#    lettuce:
+#      pool:
+#        max-idle: 50
+#        min-idle: 5
+#        max-active: 20
+#        max-wait: 100
+    data:
+      mongodb:
+        uri: mongodb://localhost:27017/test
+    #        data: 集群配置
+    #          mongodb:
+    #            uri=mongodb://user:pwd@ip1:port1,ip2:port2/database:
+    #test1 datasource
+    #    test1:
+    #      url: jdbc:mysql://localhost:3306/demo?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    #      username: root
+    #      password: 123456
+    #      driver-class-name: com.mysql.cj.jdbc.Driver
+    #    #test2 datasource
+    #    test2:
+    #      url: jdbc:mysql://localhost:3306/demo2?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    #      username: root
+    #      password: 123456
+    #      driver-class-name: com.mysql.cj.jdbc.Driver
+    # 第一次建表用create，后面使用update
+    # 不然每次重新系统工程都会先删除表再新建
+    # 控制台打印sql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    database: mysql
+    #单数据源
+#  rabbitmq:
+#    host: 192.168.0.86
+#    port: 5672
+#    username: admin
+#    password: 123456
+#    #是否确认回调
+#    publisher-confirms: true
+#    #是否返回回调
+#    publisher-returns: true
+#    listener:
+#      simple:
+#        #手动
+#        acknowledge-mode: manual
+#        #最小消费数量
+#        concurrency: 1
+#        max-concurrency: 1
+#        #是否支持重试
+#        retry:
+#          enabled: true
+
+
+mybatis:
+  type-aliases-package: com.example.demo.mapper
+  #  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+mail:
+  #以谁来发送邮件
+  fromMail:
+    addr: xxx@oo.com
+
+#  data:
+#    mongodb:
+#      custom:
+#        hosts:
+#          - localhost
+#        ports:
+#          - 27017
+#        username: bimin
+#        password: 123456
+#        database: admin
+#        connections-per-host: 20
+#        min-connections-per-host: 20
+#logging:
+#  config: classpath:conf/log4j2-d.xml
+#mybatis:
+#  mapperLocations: classpath*:mapper/*.xml
+#  typeAliasesPackage: net.cyweb.model
+#mapper:
+#  before: true
+#  mappers: net.cyweb.config.mybatis.TkMapper
+#  uuid: select replace(uuid(),'-','')
+#  identity: MYSQL
+#  not-empty: false
+#pagehelper:
+#  helperDialect: mysql
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql
+#druid:
+#  url: jdbc:mysql://222.185.192.230:30001/funcoin?useUnicode=true&&characterEncoding=utf-8
+#  driver: com.mysql.jdbc.Driver
+#  username: funcoin
+#  password: Funcoin123!@#
+#  initial-size: 5
+#  max-active: 20
+#  test-on-borrow: true
+#druid:
+#  url: jdbc:mysql://47.91.249.54:3306/funcoin?useUnicode=true&amp;characterEncoding=utf-8
+#  driver: com.mysql.jdbc.Driver
+#  username: root
+#  password: 5bGhk7rHMbBLTu
+#  initial-size: 5
+#  max-active: 20
+#  test-on-borrow: true
+#druid:
+#  url: jdbc:mysql://localhost:3306/funcoin?useUnicode=true&amp;characterEncoding=utf-8
+#  driver: com.mysql.jdbc.Driver
+#  username: root
+#  password: 12345678
+#  initial-size: 5
+#  max-active: 20
+#  test-on-borrow: true
+#eureka:
+#  instance:
+#    hostname: localhost
+#    port: 8001
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+#feign:
+#  hystrix:
+#    enabled: false
+#myProps:
+#  ftp:
+#    rootPath: G:/ftpsever/localuser/test/
+#    savePath: id_card/
+#    newReadHost: http://192.168.32.41:30010/
+#    newReadHost2: http://222.185.192.230:30010/
+#    oldReadHost: http://static.bimin.vip/
+#    adminNewPath: admin_new/images/
+#memcache:
+#  ip: 192.168.0.161
+#  port: 11211
+info:
+  app:
+    name: spring-boot-actuator
+    version: 1.0.0
+    test: test
+#http://localhost:8080/demo/actuator/health
+management:
+  endpoints:
+    web:
+      exposure:
+        #打开所有端点
+        include: "*"
+    #      base-path: /monitor
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+
